@@ -1,3 +1,3 @@
 <?php
-//each component is treated as mini Angular app
+//reusable components/contents of our app
 ?>

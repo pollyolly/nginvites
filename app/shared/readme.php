@@ -1,3 +1,3 @@
-<?php
-//acts as reusable components or partials of our site
+<?
+//these are shared components 
 ?>

@@ -1,4 +1,17 @@
-.sidenav .md-button{
+md-button {
+    font-weight: 700;
+}
+.sidenav md-list-item > button {
+    font-weight: 700 !important;
+    width: 100%;
+    height: 50px;
+    text-align: center !important;
+}
+/* .sidenav .md-button {
     padding-top: 15px !important;
     padding-bottom: 15px !important;
+} */
+md-toolbar h3{
+    margin: auto !important;
+    font-weight: 700;
 }

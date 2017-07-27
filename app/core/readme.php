@@ -1,0 +1,3 @@
+<?php
+//globally accessible components
+?>

@@ -8,46 +8,54 @@
     <!-- <link rel="stylesheet" href="assets/libs/angular-material-icons/angular-material-icons.css"> -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>       
-<body ng-app="exampleApp6" layout="column">
-    <md-toolbar>
+<body ng-app="exampleApp6" layout="column" ng-cloak>
+    <md-toolbar layout="row">
+        <md-button>
+            <md-icon md-svg-icon="assets/font/ic_menu_white_36px.svg" class="avatar"></md-icon>
+        </md-button>
         <h3>Invites</h3>
     </md-toolbar>
     <div class="container" layout="row" flex>
-        <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp sidenav" ng-cloak>
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-4dp sidenav" ng-cloak>
             <md-list>
                 <md-list-item>
-                    <md-button flex>
-                        <!-- <md-icon md-svg-scr="" class="avatar"></md-icon>  -->Send
+                    <md-button>
+                         <md-icon md-svg-icon="assets/font/ic_apps_black_24px.svg" class="avatar"></md-icon>
+                         Home
+                    </md-button>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-divider ></md-divider>
+                <md-list-item>
+                    <md-button>
                     </md-button>
                 </md-list-item>
                 <md-divider ></md-divider>
                 <md-list-item>
-                    <md-button flex>
-                        <!-- <md-icon md-svg-scr="" class="avatar"></md-icon> -->Resend
+                    <md-button>
+                        <md-icon md-svg-icon="assets/font/ic_send_black_24px.svg" class="avatar"></md-icon>
+                        Send / Resend
                     </md-button>
                 </md-list-item>
                 <md-divider ></md-divider>
                 <md-list-item>
-                    <md-button flex>
-                        <!-- <md-icon md-svg-scr="" class="avatar"></md-icon> -->Messages
+                    <md-button>
+                        <md-icon md-svg-icon="assets/font/ic_mail_outline_black_24px.svg" class="avatar"></md-icon>
+                        Template Settings
                     </md-button>
                 </md-list-item>
                 <md-divider ></md-divider>
                 <md-list-item>
-                    <md-button flex>
-                          <!-- <md-icon md-svg-scr="" class="avatar"></md-icon>  -->SMTP 
+                    <md-button>
+                          <md-icon md-svg-icon="assets/font/ic_settings_black_24px.svg" class="avatar"></md-icon>
+                          SMTP Settings
                     </md-button>
                 </md-list-item>
                 <md-divider ></md-divider>
                 <md-list-item>
-                    <md-button flex>
-                        <!-- <md-icon md-svg-scr="" class="avatar"></md-icon> -->Import
-                    </md-button>
-                </md-list-item>
-                <md-divider ></md-divider>
-                <md-list-item>
-                    <md-button flex>
-                        <!-- <md-icon md-svg-scr="" class="avatar"></md-icon> -->Export
+                    <md-button>
+                        <md-icon md-svg-icon="assets/font/ic_cloud_upload_black_24px.svg" class="avatar"></md-icon>
+                        Import / Export
                     </md-button>
                 </md-list-item>
                 <md-divider ></md-divider>
@@ -55,15 +63,24 @@
         </md-sidenav>
         <md-content id="content" ng-controller="ExampleController6" ng-cloak flex >
             <div layout-margin>
-                <div style="font-size: 12px;padding:5px;margin:0; margin-bottom:8px; line-height:18px; border: 1px solid #c4c4c4;background: white;">
-                    <ng-md-icon icon="info" size="16" style="float:left;fill:#479BFF;margin-right: 5px;"></ng-md-icon> 
-                    <span><i>Search</i> feature works with non-ajax/non-promise data. You have the possibility to change the dataset in your table which then immediately respond on that change.</span>
-                </div> 
                 <md-card style="margin:0px">
-                    <md-input-container style="margin:15px;">
-                        <label>Filter by search</label>
-                        <input type="text" ng-model="filterName">
+                    <div layout="row" flex>
+                    <md-input-container style="margin:10px 0px 0px 15px">
+                        <md-button class="md-primary md-raised">
+                            <md-icon md-svg-icon="assets/font/ic_add_white_24px.svg" class="avatar"></md-icon>
+                            New
+                        </md-button>
                     </md-input-container>
+                        <md-input-container style="margin:20px 22px 0px 22px" flex>
+                            <label>Filter by search</label>
+                            <input type="text" ng-model="filterName">
+                        </md-input-container>
+                        <md-input-container>
+                            <md-button class="md-icon-button">
+                                <md-icon md-svg-icon="assets/font/ic_more_vert_black_24px.svg" class="avatar"></md-icon>
+                            </md-button>
+                        </md-input-container>
+                    </div>
                     <div ng-hide="true">
                         {{(filteredItems = (nutritionList | filter: filterName))}}
                     </div>
@@ -111,9 +128,14 @@
                             <!-- https://codepen.io/iamisti/pen/PGxwAV -->
                             <!-- <mdt-cell>{{list.action}}</mdt-cell>  -->
                              <!-- Solution: https://github.com/iamisti/mdDataTable/issues/153  -->
-                            <mdt-custom-cell column-key="action">        
+                             <mdt-cell html-content="true">
+                                    <md-button class="md-icon-button md-primary" aria-label="Edit">
+                                        <md-icon md-svg-icon="assets/font/ic_mode_edit_black_24px.svg"></md-icon>
+                                    </md-button>
+                            </mdt-cell>
+                            <!-- <mdt-custom-cell column-key="action">        
                                 <mdt-custom-cell-button ng-click="clientScope.hello()">Angular Material button</mdt-custom-cell-button>
-                            </mdt-custom-cell>
+                            </mdt-custom-cell> -->
                             
                         </mdt-row>  
                 </mdt-table>
@@ -131,8 +153,6 @@
     <script src="assets/libs/angular-material-icons/angular-material-icons.min.js"></script>
     <script src="assets/libs/md-data-table/dist/md-data-table-templates.js"></script> 
     <script src="assets/libs/md-data-table/dist/md-data-table.js"></script>
-    <script src="app.module.js"></script> 
+    <script src="app/app.module.js"></script>
 </body>
 </html>
-
-
