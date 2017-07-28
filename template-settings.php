@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="assets/libs/md-data-table/dist/md-data-table-style.css">
     <!-- <link rel="stylesheet" href="assets/libs/angular-material-icons/angular-material-icons.css"> -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/libs/codemirror/lib/codemirror.css">
 </head>       
 <body ng-app="exampleApp6" layout="column" ng-cloak>
     <md-toolbar layout="row" ng-controller="NginvitesToolbar" ng-cloak>
         <md-button ng-click="toggleLeft()" hide-gt-sm>
             <md-icon md-svg-icon="assets/font/ic_menu_white_36px.svg" class="avatar"></md-icon>
         </md-button>
-        <h3>Invites</h3>
+        <h3>Template Settings</h3>
     </md-toolbar>
     <div class="container" layout="row" flex>
         <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-4dp sidenav" md-component-id="left" ng-cloak>
@@ -86,51 +87,42 @@
                     </div>
                 </md-card>
                 <mdt-table 
-                            table-card="{visible: true, title: 'Contact List'}"
+                            table-card="{visible: true, title: 'Template List'}"
                             selectable-rows="true"
                             alternate-headers="'contextual'"
                             paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
                             delete-row-callback="deleteRowCallback(rows)"
                             mdt-row="{ 'data': filteredItems,
                                       'table-row-id-key': 'id',
-                                      'column-keys': ['no', 'userid', 'name', 'email', 'answer', 'message', 'status', 'timelogs', 'action'] }">
+                                      'column-keys': ['no', 'subject', 'message', 'status', 'action'] }">
                     <mdt-header-row>
                         <mdt-column align-rule="left" 
                                     column-sort="true">#</mdt-column>
                         <mdt-column align-rule="right"
-                                    column-sort="true">UserID</mdt-column>
+                                    column-sort="true">Subject</mdt-column>
                         <mdt-column align-rule="right"
-                                    column-sort="true">Name</mdt-column>
-                        <mdt-column align-rule="right"
-                                    column-sort="true">Email</mdt-column>
-                        <mdt-column align-rule="right"
-                                    column-sort="true">Answer</mdt-column>
-                        <mdt-column align-rule="right"
-                                    column-sort="true">Message</mdt-column>
+                                    column-sort="true">HTML Message</mdt-column>
                         <mdt-column align-rule="right"
                                     column-sort="true">Status</mdt-column>
-                        <mdt-column align-rule="right"
-                                    column-sort="true">TimeLogs</mdt-column>
                         <mdt-column align-rule="right">Action</mdt-column>
                        
                     </mdt-header-row>
                          <mdt-row 
-                                ng-repeat="list in contactlist"
+                                ng-repeat="list in templatelist"
                                 table-row-id="list.id">
                             <mdt-cell>{{list.no}}</mdt-cell>
-                            <mdt-cell>{{list.userid}}</mdt-cell>
-                            <mdt-cell>{{list.name}}</mdt-cell>
-                            <mdt-cell>{{list.email}}</mdt-cell>
-                            <mdt-cell>{{list.answer}}</mdt-cell>
+                            <mdt-cell>{{list.subject}}</mdt-cell>
                             <mdt-cell>{{list.message}}</mdt-cell>
                             <mdt-cell>{{list.status}}</mdt-cell>
-                            <mdt-cell>{{list.timelogs}}</mdt-cell> 
                             <!-- https://codepen.io/iamisti/pen/PGxwAV -->
                             <!-- <mdt-cell>{{list.action}}</mdt-cell>  -->
                              <!-- Solution: https://github.com/iamisti/mdDataTable/issues/153  -->
                              <mdt-cell html-content="true">
                                     <md-button class="md-icon-button md-primary" aria-label="Edit">
                                         <md-icon md-svg-icon="assets/font/ic_mode_edit_black_24px.svg"></md-icon>
+                                    </md-button>
+                                    <md-button class="md-icon-button md-primary" aria-label="Use">
+                                        <md-icon md-svg-icon="assets/font/ic_check_black_24px.svg"></md-icon>
                                     </md-button>
                             </mdt-cell>
                             <!-- <mdt-custom-cell column-key="action">        
@@ -140,6 +132,29 @@
                         </mdt-row>  
                 </mdt-table>
             </div>
+        </md-content>
+        <md-content ng-controller="templateForm" flex>
+            <form name="userForm">
+                <div layout-margin>
+                    <md-card style="margin:0px; padding: 15px !important;">
+                        <md-input-container class="md-block">
+                            <label>Subject</label>
+                            <input ng-model="user.subject">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Message</label>
+                            <textarea ng-model="user.message" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                        </md-input-container>
+                        <!-- <md-input-container class="md-block"> -->
+                            <textarea id="html-editor"></textarea>
+                        <!-- </md-input-container> -->
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button>Cancel</md-button>
+                            <md-button>Save</md-button>
+                        </md-card-actions>
+                    </md-card>
+                </div>
+            </form>
         </md-content>
     </div>  
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
@@ -154,5 +169,14 @@
     <script src="assets/libs/md-data-table/dist/md-data-table-templates.js"></script> 
     <script src="assets/libs/md-data-table/dist/md-data-table.js"></script>
     <script src="app/app.module.js"></script>
+    <script src="assets/libs/codemirror/lib/codemirror.js"></script>
+    <script src="assets/libs/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script>
+        var myCodeMirror = CodeMirror(document.getElementById("html-editor"), {
+            value: "<test>",
+            lineNumbers: true,
+            mode:  "htmlmixed"
+            });
+    </script>
 </body>
 </html>

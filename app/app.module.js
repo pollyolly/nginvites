@@ -1,16 +1,8 @@
 (function(){
     'use strict';
 
-    angular.module('exampleApp6', ['ngMaterial', 'mdDataTable']);
-    angular.module('exampleApp6').directive('mdtCustomCellButton', function () {
-    return {
-        template: '<md-button class="md-primary md-raised">Angular Material button</md-button>',
-    };
-    });
-
-
-    // angular.module('exampleApp6', ['ngMaterial', 'mdDataTable']);
-    angular.module('exampleApp6').controller('ExampleController6', function($scope, $mdToast){
+    angular.module('exampleApp6', ['ngMaterial', 'mdDataTable'])
+            .controller('ExampleController6', function($scope, $mdToast){
          $scope.deleteRowCallback = function(rows){
             $mdToast.show(
                 $mdToast.simple()
@@ -18,6 +10,7 @@
                     .hideDelay(3000)
             );
         };
+
 
         $scope.hello = function() {
                 console.log( 'Hello world');
@@ -36,30 +29,33 @@
                 timelogs: 'Sent:2017-06-24 01:50:04 Response:2017-06-24 03:28:53',
                 action: 'sample'
             },
+        ];
+        $scope.templatelist = [
             {
                 id: 601,
                 no: 1,
-                userid: 1595,
-                name: 'John Mark Roco',
-                email: 'sample@gmail.com',
-                answer: 'Yes',
-                message: 'testing messages and what more ther\'s more thatn that.',
-                status: 'pending',
-                timelogs: 'Sent:2017-06-24 01:50:04 Response:2017-06-24 03:28:53',
+                subject: 'Uvle Beta Testing',
+                message: 'We are fighting Dreamer! We are fighting Dreamer! We are fighting Dreamer! We are fighting Dreamer! We are fighting Dreamer!',
+                status: 'Not in Use',
                 action: 'sample'
             },
-            {
-                id: 601,
-                no: 1,
-                userid: 1595,
-                name: 'John Mark Roco',
-                email: 'sample@gmail.com',
-                answer: 'Yes',
-                message: 'testing messages and what more ther\'s more thatn that.',
-                status: 'pending',
-                timelogs: 'Sent:2017-06-24 01:50:04 Response:2017-06-24 03:28:53',
-                action: 'sample'
-            }
         ];
+    })
+    
+    .controller('NginvitesToolbar', function($scope, $timeout, $mdSidenav){
+        $scope.toggleLeft = buildToggler('left');
+        $scope.toggleRight = buildToggler('right');
+        function buildToggler(componentId){
+            return function(){
+                $mdSidenav(componentId).toggle();
+            }
+        }
+    })
+    .controller('templateForm', function($scope){
+        $scope.user = {
+            subject: 'Developer',
+            message: 'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!'
+            };
     });
 }());
+
