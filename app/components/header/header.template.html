@@ -1,0 +1,6 @@
+<md-toolbar layout="row" ng-repeat="list in headerList" ng-cloak>
+    <md-button hide-gt-sm ng-click="toggleLeft.buildToggler()">
+        <md-icon md-svg-icon="{{list.icon}}" class="avatar"></md-icon>
+    </md-button>
+    <h3>{{list.title}}</h3>
+</md-toolbar>

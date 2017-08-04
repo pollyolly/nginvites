@@ -1,7 +1,6 @@
 (function(){
     'use strict';
-
-    angular.module('exampleApp6', ['ngMaterial', 'mdDataTable'])
+    angular.module('exampleApp6', ['ngMaterial', 'mdDataTable', 'sidenavList'])
             .controller('ExampleController6', function($scope, $mdToast){
          $scope.deleteRowCallback = function(rows){
             $mdToast.show(
@@ -53,8 +52,8 @@
     })
     .controller('templateForm', function($scope){
         $scope.user = {
-            subject: 'Developer',
-            message: 'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!'
+            subject: 'Subject',
+            message: 'Message...'
             };
     });
 }());

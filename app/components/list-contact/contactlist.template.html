@@ -1,0 +1,61 @@
+<md-content id="content" ng-cloak flex>
+    <div layout-margin>
+        <md-card style="margin:0px">
+            <div layout="row" flex>
+                <md-input-container style="margin:10px 0px 0px 15px">
+                    <md-button class="md-primary md-raised">
+                        <md-icon md-svg-icon="assets/font/ic_add_white_24px.svg" class="avatar"></md-icon>
+                        New
+                    </md-button>
+                </md-input-container>
+                <md-input-container style="margin:20px 22px 0px 22px" flex>
+                    <label>Filter by search</label>
+                    <input type="text" ng-model="filterName">
+                </md-input-container>
+                <md-input-container>
+                    <md-button class="md-icon-button">
+                        <md-icon md-svg-icon="assets/font/ic_more_vert_black_24px.svg" class="avatar"></md-icon>
+                    </md-button>
+                </md-input-container>
+            </div>
+            <div ng-hide="true">
+                {{(filteredItems = (contactList | filter: filterName))}}
+            </div>
+        </md-card>
+        <mdt-table table-card="{visible: true, title: 'Contact List'}" selectable-rows="true" alternate-headers="'contextual'" paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+            delete-row-callback="deleteRowCallback(rows)" mdt-row="{ 'data': filteredItems,
+                                      'table-row-id-key': 'id',
+                                      'column-keys': ['no', 'userid', 'name', 'email', 'answer', 'message', 'status', 'timelogs', 'action'] }">
+            <mdt-header-row>
+                <mdt-column align-rule="left" column-sort="true">#</mdt-column>
+                <mdt-column align-rule="right" column-sort="true">UserID</mdt-column>
+                <mdt-column align-rule="right" column-sort="true">Name</mdt-column>
+                <mdt-column align-rule="right" column-sort="true">Email</mdt-column>
+                <mdt-column align-rule="right" column-sort="true">Answer</mdt-column>
+                <mdt-column align-rule="right" column-sort="true">Message</mdt-column>
+                <mdt-column align-rule="right" column-sort="true">Status</mdt-column>
+                <mdt-column align-rule="right" column-sort="true">TimeLogs</mdt-column>
+                <mdt-column align-rule="right">Action</mdt-column>
+
+            </mdt-header-row>
+            <mdt-row ng-repeat="list in contactList" table-row-id="list.id">
+                <mdt-cell>{{list.no}}</mdt-cell>
+                <mdt-cell>{{list.userid}}</mdt-cell>
+                <mdt-cell>{{list.name}}</mdt-cell>
+                <mdt-cell>{{list.email}}</mdt-cell>
+                <mdt-cell>{{list.answer}}</mdt-cell>
+                <mdt-cell>{{list.message}}</mdt-cell>
+                <mdt-cell>{{list.status}}</mdt-cell>
+                <mdt-cell>{{list.timelogs}}</mdt-cell>
+
+                <mdt-cell html-content="true">
+                    <md-button class="md-icon-button md-primary" aria-label="Edit">
+                        <md-icon md-svg-icon="assets/font/ic_mode_edit_black_24px.svg"></md-icon>
+                    </md-button>
+                </mdt-cell>
+
+
+            </mdt-row>
+        </mdt-table>
+    </div>
+</md-content>

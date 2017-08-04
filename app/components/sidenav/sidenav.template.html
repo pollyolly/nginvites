@@ -1,0 +1,13 @@
+<md-sidenav style="height: 100% !important;" md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-4dp sidenav" md-component-id="left" ng-cloak>
+    <md-list>
+        <div ng-repeat="list in sidenavList">
+            <md-list-item>
+                <md-button ng-href="{{list.url}}">
+                    <md-icon md-svg-icon="{{list.icon}}" class="avatar"></md-icon>
+                    {{list.name}}
+                </md-button>
+            </md-list-item>
+            <md-divider></md-divider>
+        </div>
+    </md-list>
+</md-sidenav>
